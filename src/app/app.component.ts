@@ -22,25 +22,25 @@ export class AppComponent implements OnInit {
       }
     ]
   };
-  subjects = [];
+  subjects: any;
   constructor() {}
   ngOnInit() {
     this.formGroup = new FormGroup({
-      fname: new FormControl(),
+      fname: new FormControl(''),
       subjects: new FormArray([])
     });
+    this.subjects = this.formGroup['subjects'].controls;
   }
 
   addSubjects() {
-    this.subjects.push(
-      new FormGroup({
-        subject: new FormControl(''),
-        mark: new FormControl('')
-      })
-    );
+    const cont = new FormGroup({
+      subject: new FormControl(''),
+      mark: new FormControl('')
+    });
+    this.subjects.add(cont);
   }
 
   getFormValues() {
-    this.val = this.formGroup.getRawValue();
+    this.val = this.formGroup.value();
   }
 }

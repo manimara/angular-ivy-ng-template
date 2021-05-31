@@ -9,9 +9,14 @@
     <input type="text" name="ctrl.name" >
   </div>
   <button (click)="addSubjects()">Add Subject</button>
-  <div *ngFor="let ctrl of subjects.controls">
-    <label for="ctrl.name">{{ctrl.name}}</label>
-    <input type="text" name="ctrl.name" >
+
+  <div *ngFor="let sub of subjects">
+    <p>{{sub.control|json}}</p>
+
+    <!-- <div *ngFor="let ctrl of sub">
+      <label for="ctrl.name">{{ctrl.name}}</label>
+      <input type="text" name="ctrl.name" >
+    </div> -->
   </div>
   <button (click)="getFormValues()">getValues</button>
 
