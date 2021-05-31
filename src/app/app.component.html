@@ -2,3 +2,19 @@
 <p>
   Start editing to see some magic happen :)
 </p>
+
+<form [formGroup]="formGroup">
+  <div *ngFor="let ctrl of controls">
+    <label for="ctrl.name">{{ctrl.name}}</label>
+    <input type="text" name="ctrl.name" >
+  </div>
+  <button (click)="addSubjects()">Add Subject</button>
+  <div *ngFor="let ctrl of subjects.controls">
+    <label for="ctrl.name">{{ctrl.name}}</label>
+    <input type="text" name="ctrl.name" >
+  </div>
+  <button (click)="getFormValues()">getValues</button>
+
+</form>
+
+<div>{{val|json}}</div>
