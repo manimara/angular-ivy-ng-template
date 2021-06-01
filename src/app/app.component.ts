@@ -1,5 +1,5 @@
 import { Component, OnInit, VERSION } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'my-app',
@@ -22,25 +22,41 @@ export class AppComponent implements OnInit {
       }
     ]
   };
-  subjects: any;
-  constructor() {}
+  get c() {
+    return this.formGroup.controls;
+  }
+  get subjects() {
+    return this.c.subjects as FormArray;
+  }
+
+  get subjectControls() {
+    return this.subjects.controls;
+  }
+  constructor(private formBuilder: FormBuilder) {}
   ngOnInit() {
     this.formGroup = new FormGroup({
       fname: new FormControl(''),
       subjects: new FormArray([])
     });
-    this.subjects = this.formGroup['subjects'].controls;
   }
 
   addSubjects() {
-    const cont = new FormGroup({
-      subject: new FormControl(''),
-      mark: new FormControl('')
-    });
-    this.subjects.add(cont);
+    debugger;
+    //     this.formBuilder.group({
+    //   subject: new FormControl(''),
+    //   mark: new FormControl('')
+    // })
+    this.subjects.push(
+      new FormGroup({
+        subject: new FormControl(''),
+        mark: new FormControl('')
+      })
+    );
+    // (this.subjects as FormArray).push
   }
 
   getFormValues() {
-    this.val = this.formGroup.value();
+    debugger;
+    this.val = this.formGroup.value;
   }
 }

@@ -1,22 +1,24 @@
 <hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
 
 <form [formGroup]="formGroup">
   <div *ngFor="let ctrl of controls">
     <label for="ctrl.name">{{ctrl.name}}</label>
-    <input type="text" name="ctrl.name" >
+    <input type="text" [formControlName]="ctrl.name" >
   </div>
   <button (click)="addSubjects()">Add Subject</button>
 
-  <div *ngFor="let sub of subjects">
-    <p>{{sub.control|json}}</p>
-
-    <!-- <div *ngFor="let ctrl of sub">
-      <label for="ctrl.name">{{ctrl.name}}</label>
-      <input type="text" name="ctrl.name" >
-    </div> -->
+  <div *ngFor="let sub of subjects.controls, let i = index">
+    <!-- <p>{{sub|json}}</p> -->
+    <!-- <ng-container formArrayName="sub"> -->
+    <!-- <ng-container [formGroup]="sub"> -->
+    <ng-container formGroupName="{{sub}}">
+      <!-- <div [formGroup]="sub"> -->
+      <span *ngFor="let ctrl of sub.controls">
+        <label for="ctrl.name">{{ctrl.name}}</label>
+        <input type="text" formControlName="ctrl.name" >
+      </span>
+      <!-- </div> -->
+    </ng-container>
   </div>
   <button (click)="getFormValues()">getValues</button>
 
